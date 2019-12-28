@@ -1,0 +1,17 @@
+body {
+  font-family: sans-serif;
+  color: #141618;
+}
+
+.description {
+  font-size: 14px;
+  color: 46484A
+}
+
+.portrait {
+  background: url(../img/portrait.jpg);
+  width: 300px;
+  height: 300px;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+}
