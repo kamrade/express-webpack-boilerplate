@@ -5,7 +5,8 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 module.exports = {
 
   entry: {
-    main: './src/index.js',
+    // main: './src/index.js',
+    main: ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000', './src/index.js']
   },
 
   output: {
@@ -23,6 +24,16 @@ module.exports = {
   module: {
     rules: [
       {
+        enforce: 'pre',
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+        options: {
+          emitWarning: true,
+          failOnError: false,
+          failOnWarning: false
+        }
+      }, {
         // ES6-8 to ES5
         test: /\.js$/,
         exclude: /node_modules/,
@@ -46,6 +57,7 @@ module.exports = {
       filename: './index.html',
       excludeChunks: [ 'server' ]
     }),
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
   ]
 
