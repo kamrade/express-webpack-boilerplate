@@ -2,37 +2,43 @@ const path = require('path');
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 
-module.exports = {
+module.exports = (env, argv) => {
+  const SERVER_PATH = (argv.mode === 'production') ?
+    './src/server/server-prod.js' :
+    './src/server/server-dev.js';
 
-  entry: {
-    server: './src/server/server.js'
-  },
+  return ({
 
-  output: {
-    path: path.join(__dirname, 'dist'),
-    publicPath: '/',
-    filename: '[name].js'
-  },
+    entry: {
+      server: SERVER_PATH
+    },
 
-  target: 'node',
+    output: {
+      path: path.join(__dirname, 'dist'),
+      publicPath: '/',
+      filename: '[name].js'
+    },
 
-  node: {
-    __dirname: false,
-    __filename: false
-  },
+    target: 'node',
 
-  externals: [nodeExternals()],
+    node: {
+      __dirname: false,
+      __filename: false
+    },
 
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
+    externals: [nodeExternals()],
+
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader'
+          }
         }
-      }
-    ]
-  }
-  
+      ]
+    }
+
+  });
 }
