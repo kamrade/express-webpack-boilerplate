@@ -52,6 +52,10 @@ module.exports = {
         test: /\.css$/,
         use: [ MiniCssExtractPlugin.loader, 'css-loader' ]
       }, {
+        test: /\.s[ac]ss$/,
+        exclude: /node_modules/,
+        use: [ 'style-loader', 'css-loader', 'sass-loader' ]
+      }, {
         test: /\.(png|svg|jpg|gif)$/,
         // use: ['file-loader']
         use: [{ loader: 'url-loader' }]
@@ -63,6 +67,11 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: './src/html/index.html',
       filename: './index.html'
+    }),
+    new HtmlWebPackPlugin({
+      template: './src/html/contacts.html',
+      filename: './contacts.html',
+      excludeChunks: [ 'server' ]
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',

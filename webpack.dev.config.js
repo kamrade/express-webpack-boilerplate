@@ -6,7 +6,7 @@ module.exports = {
 
   entry: {
     // main: './src/index.js',
-    main: ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000', './src/index.js']
+    main: ['webpack-hot-middleware/client?path=/__webpack_hmr&reload=true&timeout=20000', './src/index.js']
   },
 
   output: {
@@ -43,7 +43,12 @@ module.exports = {
         use: [{ loader: 'html-loader' }]
       }, {
         test: /\.css$/,
+        exclude: /node_modules/,
         use: [ 'style-loader', 'css-loader' ]
+      }, {
+        test: /\.s[ac]ss$/,
+        exclude: /node_modules/,
+        use: [ 'style-loader', 'css-loader', 'sass-loader' ]
       }, {
         test: /\.(png|svg|jpg|gif)$/,
         use: ['file-loader']
@@ -51,10 +56,21 @@ module.exports = {
     ]
   },
 
+  watchOptions: {
+    ignored: '/node_modules/'
+  },
+
   plugins: [
     new HtmlWebPackPlugin({
+      title: 'index',
       template: './src/html/index.html',
       filename: './index.html',
+      excludeChunks: [ 'server' ]
+    }),
+    new HtmlWebPackPlugin({
+      title: 'contacts',
+      template: './src/html/contacts.html',
+      filename: './contacts.html',
       excludeChunks: [ 'server' ]
     }),
     new webpack.HotModuleReplacementPlugin(),

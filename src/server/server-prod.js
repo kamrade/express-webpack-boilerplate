@@ -6,11 +6,16 @@ import express from 'express';
 const app = express();
 const DIST_DIR = __dirname;
 const HTML_FILE = path.join(DIST_DIR, 'index.html');
+const CONTACTS_FILE = path.join(DIST_DIR, 'contacts.html');
 
 app.use(express.static(DIST_DIR));
 
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(HTML_FILE);
+});
+
+app.get('/contacts', (req, res) => {
+  res.sendFile(CONTACTS_FILE);
 });
 
 const PORT = process.env.PORT || 8080;
