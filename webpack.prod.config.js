@@ -41,11 +41,20 @@ module.exports = {
       }, {
         // Loads the js into html template provided.
         // Entry point is set below in HtmlWebPackPlugin in Plugins section
-        test: /\.html$/,
-        use: [{
-          loader: 'html-loader',
-          options: { minimize: true }
-        }]
+      //   test: /\.html$/,
+      //   use: [{
+      //     loader: 'html-loader',
+      //     options: { minimize: true }
+      //   }]
+      // }, {
+        test: /\.pug$/,
+        loaders: [
+          { loader: 'html-loader',
+            options: { minimize: true }
+          }, {
+            loader: 'pug-html-loader'
+          }
+        ]
       }, {
         // Loads CSS into a file when you import it via JS
         // Rules are set in MiniCssExtractPlugin
@@ -65,11 +74,12 @@ module.exports = {
 
   plugins: [
     new HtmlWebPackPlugin({
-      template: './src/html/index.html',
-      filename: './index.html'
+      template: './src/views/main.pug',
+      filename: './index.html',
+      excludeChunks: [ 'server' ]
     }),
     new HtmlWebPackPlugin({
-      template: './src/html/contacts.html',
+      template: './src/views/contacts.pug',
       filename: './contacts.html',
       excludeChunks: [ 'server' ]
     }),

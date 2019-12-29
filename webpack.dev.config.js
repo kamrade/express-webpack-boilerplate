@@ -34,13 +34,22 @@ module.exports = {
           failOnWarning: false
         }
       }, {
+        test: /\.pug$/,
+        loaders: [
+          { loader: 'html-loader' },
+          {
+            loader: 'pug-html-loader',
+            options: { 'pretty': true }
+          }
+        ]
+      }, {
         // ES6-8 to ES5
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader'
-      }, {
-        test: /\.html$/,
-        use: [{ loader: 'html-loader' }]
+      // }, {
+      //   test: /\.html$/,
+      //   use: [{ loader: 'html-loader' }]
       }, {
         test: /\.css$/,
         exclude: /node_modules/,
@@ -63,13 +72,13 @@ module.exports = {
   plugins: [
     new HtmlWebPackPlugin({
       title: 'index',
-      template: './src/html/index.html',
+      template: './src/views/main.pug',
       filename: './index.html',
       excludeChunks: [ 'server' ]
     }),
     new HtmlWebPackPlugin({
       title: 'contacts',
-      template: './src/html/contacts.html',
+      template: './src/views/contacts.pug',
       filename: './contacts.html',
       excludeChunks: [ 'server' ]
     }),
