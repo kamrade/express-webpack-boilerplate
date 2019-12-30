@@ -1,11 +1,14 @@
+$gray-600: #626467;
+$gray-900: #141618;
+
 body {
   font-family: sans-serif;
-  color: #141618;
+  color: $gray-900;
 }
 
 .description {
   font-size: 14px;
-  color: #525457;
+  color: $gray-600;
   // color: red;
 }
 
@@ -26,4 +29,9 @@ body {
     display: inline-block;
     padding-right: 10px;
   }
+}
+
+.footer {
+  font-size: 14px;
+  color: $gray-600;
 }

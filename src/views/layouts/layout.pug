@@ -3,13 +3,8 @@ html(lang="en")
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     meta(http-equiv="X-UA-Compatible" content="ie=edge")
-    title Express and Webpack boilerplate
+    block title
     
   body
-    .nav
-      a(href="/") Home
-      a(href="/contacts") Contacts
-      
-    h1 Contacts
-    p.description Please, contact us
-    .contacts-portrait
+    block content
+    include ../parts/footer.pug

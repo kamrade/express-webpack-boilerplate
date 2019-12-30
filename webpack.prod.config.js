@@ -74,12 +74,12 @@ module.exports = {
 
   plugins: [
     new HtmlWebPackPlugin({
-      template: './src/views/main.pug',
+      template: './src/views/pages/main.pug',
       filename: './index.html',
       excludeChunks: [ 'server' ]
     }),
     new HtmlWebPackPlugin({
-      template: './src/views/contacts.pug',
+      template: './src/views/pages/contacts.pug',
       filename: './contacts.html',
       excludeChunks: [ 'server' ]
     }),
