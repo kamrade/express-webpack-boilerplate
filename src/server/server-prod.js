@@ -1,7 +1,8 @@
-// const path = require('path');
-// const express = require('express');
 import path from 'path';
 import express from 'express';
+
+app.set('view engine', 'pug')
+app.set('views', './dist/views/pages')
 
 const app = express();
 const DIST_DIR = __dirname;
@@ -10,12 +11,12 @@ const CONTACTS_FILE = path.join(DIST_DIR, 'contacts.html');
 
 app.use(express.static(DIST_DIR));
 
-app.get('/', (req, res) => {
-  res.sendFile(HTML_FILE);
+app.get('/', (req, res, next) => {
+  res.render('index', {title: 'xPack'});
 });
 
-app.get('/contacts', (req, res) => {
-  res.sendFile(CONTACTS_FILE);
+app.get('/contacts', (req, res, next) => {
+  res.render('contacts', {title: 'Contacts'});
 });
 
 const PORT = process.env.PORT || 8080;

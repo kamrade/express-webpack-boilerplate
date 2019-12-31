@@ -1,6 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const HtmlWebPackPugPlugin = require('html-webpack-pug-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
 
@@ -34,15 +36,6 @@ module.exports = {
           failOnWarning: false
         }
       }, {
-        test: /\.pug$/,
-        loaders: [
-          { loader: 'html-loader' },
-          {
-            loader: 'pug-html-loader',
-            options: { 'pretty': true }
-          }
-        ]
-      }, {
         // ES6-8 to ES5
         test: /\.js$/,
         exclude: /node_modules/,
@@ -70,18 +63,17 @@ module.exports = {
   },
 
   plugins: [
+    new CopyPlugin([{
+      from: './src/views',
+      to: 'views'
+    }]),
     new HtmlWebPackPlugin({
       title: 'index',
-      template: './src/views/pages/main.pug',
-      filename: './index.html',
+      template: './src/views/layouts/layout.pug',
+      filename: './views/layouts/layout.pug',
       excludeChunks: [ 'server' ]
     }),
-    new HtmlWebPackPlugin({
-      title: 'contacts',
-      template: './src/views/pages/contacts.pug',
-      filename: './contacts.html',
-      excludeChunks: [ 'server' ]
-    }),
+    new HtmlWebPackPugPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
   ]

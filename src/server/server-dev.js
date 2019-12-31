@@ -11,27 +11,21 @@ const HTML_FILE = path.join(DIST_DIR, 'index.html');
 const CONTACTS_FILE = path.join(DIST_DIR, 'contacts.html');
 const compiler = webpack(config);
 
+app.set('view engine', 'pug')
+app.set('views', './dist/views/pages')
+
 app.use(webpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath
 }));
 
 app.use(webpackHotMiddleware(compiler));
 
-// app.use(express.static(DIST_DIR));
-
 app.get('/', (req, res, next) => {
-  compiler.outputFileSystem.readFile(HTML_FILE, (err, result) => {
-    if (err) {
-      return next(err);
-    }
-    res.set('content-type', 'text/html');
-    res.send(result);
-    res.end();
-  });
+  res.render('index', { title: 'xPack' });
 });
 
 app.get('/contacts', (req, res, next) => {
-  res.sendFile(CONTACTS_FILE);
+  res.render('contacts', { title: 'Contacts' });
 });
 
 const PORT = process.env.PORT || 8080;

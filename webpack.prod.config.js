@@ -39,23 +39,6 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader'
       }, {
-        // Loads the js into html template provided.
-        // Entry point is set below in HtmlWebPackPlugin in Plugins section
-      //   test: /\.html$/,
-      //   use: [{
-      //     loader: 'html-loader',
-      //     options: { minimize: true }
-      //   }]
-      // }, {
-        test: /\.pug$/,
-        loaders: [
-          { loader: 'html-loader',
-            options: { minimize: true }
-          }, {
-            loader: 'pug-html-loader'
-          }
-        ]
-      }, {
         // Loads CSS into a file when you import it via JS
         // Rules are set in MiniCssExtractPlugin
         test: /\.css$/,
@@ -73,16 +56,17 @@ module.exports = {
   },
 
   plugins: [
+    new CopyPlugin([{
+      from: './src/views',
+      to: 'views'
+    }]),
     new HtmlWebPackPlugin({
-      template: './src/views/pages/main.pug',
-      filename: './index.html',
+      title: 'index',
+      template: './src/views/layouts/layout.pug',
+      filename: './views/layouts/layout.pug',
       excludeChunks: [ 'server' ]
     }),
-    new HtmlWebPackPlugin({
-      template: './src/views/pages/contacts.pug',
-      filename: './contacts.html',
-      excludeChunks: [ 'server' ]
-    }),
+    new HtmlWebPackPugPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css'
