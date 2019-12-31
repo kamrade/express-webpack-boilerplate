@@ -11,10 +11,12 @@ const HTML_FILE = path.join(DIST_DIR, 'index.html');
 const CONTACTS_FILE = path.join(DIST_DIR, 'contacts.html');
 const compiler = webpack(config);
 
-app.set('view engine', 'pug')
-app.set('views', './dist/views/pages')
+app.set('view engine', 'pug');
+app.set('views', './dist/views/pages');
 
 app.use(webpackDevMiddleware(compiler, {
+  noInfo: true,
+  quiet: true,
   publicPath: config.output.publicPath
 }));
 

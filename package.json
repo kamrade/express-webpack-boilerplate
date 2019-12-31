@@ -4,6 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+
+    "clean": "rimraf dist",
+    "create-folder": "mkdir ./dist",
+    "prepare-folder": "npm-run-all clean create-folder",
+
+    "watch:backend": "webpack --mode development --config webpack.server.config.js --watch",
+    "watch:frontend": "webpack --mode development --config webpack.dev.config.js --watch",
+    "serve": "nodemon ./dist/server.js",
+
+    "gogo": "run-p prepare-folder watch:backend watch:frontend serve",
+
     "buildDev": "rm -rf dist && webpack --mode development --config webpack.server.config.js && webpack --mode development --config webpack.dev.config.js --watch",
     "buildProd": "rm -rf dist && webpack --mode production --config webpack.server.config.js && webpack --mode production --config webpack.prod.config.js",
     "start": "node ./dist/server.js"

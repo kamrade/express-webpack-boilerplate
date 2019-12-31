@@ -1,14 +1,13 @@
 import path from 'path';
 import express from 'express';
 
-app.set('view engine', 'pug')
-app.set('views', './dist/views/pages')
-
 const app = express();
 const DIST_DIR = __dirname;
 const HTML_FILE = path.join(DIST_DIR, 'index.html');
 const CONTACTS_FILE = path.join(DIST_DIR, 'contacts.html');
 
+app.set('view engine', 'pug');
+app.set('views', './dist/views/pages');
 app.use(express.static(DIST_DIR));
 
 app.get('/', (req, res, next) => {

@@ -6,6 +6,8 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
 
+  stats: 'errors-only',
+
   entry: {
     main: ['webpack-hot-middleware/client?path=/__webpack_hmr&reload=true&timeout=20000', './src/index.js']
   },

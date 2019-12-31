@@ -9,6 +9,8 @@ module.exports = (env, argv) => {
 
   return ({
 
+    stats: 'errors-only',
+
     entry: {
       server: SERVER_PATH
     },
