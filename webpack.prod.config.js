@@ -34,7 +34,6 @@ module.exports = {
   module: {
     rules: [
       {
-        // ES6-8 to ES5
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader'
@@ -49,7 +48,6 @@ module.exports = {
         use: [ 'style-loader', 'css-loader', 'sass-loader' ]
       }, {
         test: /\.(png|svg|jpg|gif)$/,
-        // use: ['file-loader']
         use: [{ loader: 'url-loader' }]
       }
     ]
