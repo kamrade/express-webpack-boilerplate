@@ -17,6 +17,7 @@ app.set('views', './dist/views/pages');
 app.use(webpackDevMiddleware(compiler, {
   noInfo: true,
   quiet: true,
+  logLevel: 'silent',
   publicPath: config.output.publicPath
 }));
 
