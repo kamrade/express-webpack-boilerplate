@@ -4,17 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-
     "clean": "rimraf dist",
     "create-folder": "mkdir ./dist",
     "prepare-folder": "npm-run-all clean create-folder",
-
     "watch:backend": "webpack --mode development --config webpack.server.config.js --watch",
     "watch:frontend": "webpack --mode development --config webpack.dev.config.js --watch",
     "serve": "nodemon ./dist/server.js",
-
     "start:dev": "run-p prepare-folder watch:backend watch:frontend serve",
-
     "buildDev": "rm -rf dist && webpack --mode development --config webpack.server.config.js && webpack --mode development --config webpack.dev.config.js --watch",
     "buildProd": "rm -rf dist && webpack --mode production --config webpack.server.config.js && webpack --mode production --config webpack.prod.config.js",
     "start": "node ./dist/server.js"
@@ -33,13 +29,6 @@
     "babel-loader": "^8.0.6",
     "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.4.0",
-    "eslint": "^6.8.0",
-    "eslint-loader": "^3.0.3",
-    "eslint-plugin-import": "^2.19.1",
-    "eslint-plugin-node": "^11.0.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-react": "^7.17.0",
-    "eslint-plugin-standard": "^4.0.1",
     "file-loader": "^5.0.2",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
@@ -49,6 +38,7 @@
     "nodemon": "^2.0.2",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "pug-html-loader": "^1.1.5",
+    "rimraf": "^3.0.0",
     "sass-loader": "^8.0.0",
     "style-loader": "^1.1.2",
     "uglifyjs-webpack-plugin": "^2.2.0",
