@@ -1,9 +1,19 @@
+$white: #fff;
+$yellow: yellow;
 $gray-600: #626467;
 $gray-900: #141618;
 
-body {
+$spacer: 1rem;
+$spacer-sm: 0.5 * $spacer;
+
+@import './components/nav';
+@import './components/panel';
+
+html, body {
   font-family: sans-serif;
   color: $gray-900;
+  padding: 0;
+  margin: 0;
 }
 
 .description {
@@ -22,13 +32,6 @@ body {
 
 .contacts-portrait {
   background: url(../img/portrait-2.jpg);
-}
-
-.nav {
-  a, a:link, a:visited {
-    display: inline-block;
-    padding-right: 10px;
-  }
 }
 
 .footer {

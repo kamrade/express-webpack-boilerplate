@@ -29,7 +29,10 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
+        exclude: [
+          /node_modules/,
+          path.resolve(__dirname, 'sw_cached_pages.js')
+        ],
         loader: 'babel-loader'
       }, {
         test: /\.css$/,
@@ -54,6 +57,10 @@ module.exports = {
     new CopyPlugin([{
       from: './src/views',
       to: 'views'
+    }]),
+    new CopyPlugin([{
+      from: './sw_cached_pages.js',
+      to: 'sw_cached_pages.js'
     }]),
     new HtmlWebPackPlugin({
       title: 'layout',
