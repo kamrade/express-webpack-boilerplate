@@ -3,7 +3,9 @@ import express from 'express';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
+import bodyParser from 'body-parser';
 import config from '../../webpack.dev.config.js';
+import dataEng from '../data/data-eng';
 
 const app = express();
 const DIST_DIR = __dirname;
@@ -13,22 +15,21 @@ const compiler = webpack(config);
 
 app.set('view engine', 'pug');
 app.set('views', './dist/views/pages');
-
 app.use(webpackDevMiddleware(compiler, {
   noInfo: true,
   quiet: true,
   logLevel: 'silent',
   publicPath: config.output.publicPath
 }));
-
 app.use(webpackHotMiddleware(compiler));
+app.use(bodyParser.json());
 
 app.get('/', (req, res, next) => {
-  res.render('index', { title: 'xPack' });
+  res.render('index', { ...dataEng.pages.index });
 });
 
 app.get('/contacts', (req, res, next) => {
-  res.render('contacts', { title: 'Contacts' });
+  res.render('contacts', { ...dataEng.pages.contacts });
 });
 
 const PORT = process.env.PORT || 8080;

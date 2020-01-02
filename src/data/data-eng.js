@@ -1,10 +1,12 @@
 export default {
   pages: {
-    main: {
-      title: 'xPack'
+    index: {
+      title: 'xPack',
+      description: ''
     },
     contacts: {
-      title: 'Contacts'
+      title: 'Contacts',
+      description: ''
     }
   }
 }
