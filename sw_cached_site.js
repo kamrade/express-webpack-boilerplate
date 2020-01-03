@@ -4,28 +4,11 @@
 // SW Fetching -> Navigated to website -> SW Fetching ->
 // -> SW registered -> SW installed -> SW caching files
 
-const cacheName = 'v1';
-const cacheAssets = [
-  '/',
-  'contacts',
-  'main.js'
-];
+const cacheName = 'v2';
 
 // Call install event
 self.addEventListener('install', e => {
   console.log('::: service worker: installed');
-  e.waitUntil(
-    caches
-      .open(cacheName)
-      .then(cache => {
-        console.log('::: service worker: caching files…');
-        cache.addAll(cacheAssets);
-      })
-      .catch(err => console.log('::: service worker: fail'))
-      .then( () => {
-        self.skipWaiting();
-      })
-  );
 });
 
 // Call activate event
@@ -51,6 +34,19 @@ self.addEventListener('fetch', e => {
   console.log('::: service worker: fetching');
   e.respondWith(
     fetch(e.request)
-      .catch(() => caches.match(e.request))
-  )
+      .then(res => {
+        // make copy/clone of response
+        const resClone = res.clone();
+        // Open cache
+        caches
+          .open(cacheName)
+          .then(cache => {
+            // Add response to the cache
+            if (e.request.url.indexOf('http') === 0) {
+              cache.put(e.request, resClone);
+            }
+          });
+        return res;
+      }).catch(err => caches.match(e.request).then(res => res))
+  );
 })

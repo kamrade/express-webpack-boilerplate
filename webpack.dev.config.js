@@ -62,6 +62,10 @@ module.exports = {
       from: './sw_cached_pages.js',
       to: 'sw_cached_pages.js'
     }]),
+    new CopyPlugin([{
+      from: './sw_cached_site.js',
+      to: 'sw_cached_site.js'
+    }]),
     new HtmlWebPackPlugin({
       title: 'layout',
       template: './src/views/layouts/layout.pug',

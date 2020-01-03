@@ -60,6 +60,14 @@ module.exports = {
       from: './src/views',
       to: 'views'
     }]),
+    new CopyPlugin([{
+      from: './sw_cached_pages.js',
+      to: 'sw_cached_pages.js'
+    }]),
+    new CopyPlugin([{
+      from: './sw_cached_site.js',
+      to: 'sw_cached_site.js'
+    }]),
     new HtmlWebPackPlugin({
       title: 'index',
       template: './src/views/layouts/layout.pug',
